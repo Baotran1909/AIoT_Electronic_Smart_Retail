@@ -269,7 +269,7 @@ const App = ({ onLogout, isGuest = false, onLoginSuccess = null }) => {
     if (newCart.length >= 2) {
       const checkText = `Tôi vừa thêm ${product.name} vào giỏ hàng đã có ${newCart.map(i => i.name).join(', ')}. Giỏ hàng này có thiếu linh kiện phụ trợ hoặc xung đột điện áp nào không? Trả lời ngắn gọn.`;
       try {
-        const response = await fetch('http://127.0.0.1:8001/user-ai', {
+        const response = await fetch('https://smart-retail-user.onrender.com/user-ai', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -359,7 +359,7 @@ const App = ({ onLogout, isGuest = false, onLoginSuccess = null }) => {
       
       const productContext = buildCompactProductContext();
 
-      const response = await fetch("http://127.0.0.1:8001/user-ai", {
+      const response = await fetch("https://smart-retail-user.onrender.com/user-ai", {
   method: "POST",
   headers: {
     "Content-Type": "application/json"

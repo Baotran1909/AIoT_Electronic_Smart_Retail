@@ -268,7 +268,7 @@ const handleAskAI = async () => {
     // =========================
 
     const response = await fetch(
-      "http://127.0.0.1:8001/ask-ai",
+      "https://smart-retail-user.onrender.com/ask-ai",
       {
         method: "POST",
 

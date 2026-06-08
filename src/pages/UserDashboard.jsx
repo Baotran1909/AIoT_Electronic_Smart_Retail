@@ -328,7 +328,7 @@ const App = ({ onLogout, isGuest = false, onLoginSuccess = null }) => {
     }
   };
 
-  // --- OPENCLAW AI AGENT THỰC TẾ ---
+ 
   const addAgentSystemLog = (log) => {
     setAgentLogs(prev => [...prev.slice(-3), { id: Date.now(), text: log }]);
   };
@@ -343,8 +343,8 @@ const App = ({ onLogout, isGuest = false, onLoginSuccess = null }) => {
 
     const steps = [
       "Đang nhận diện yêu cầu từ người dùng...",
-      "Truy vấn Agent AIService...",
-      "OpenClaw đang tổng hợp dữ liệu..."
+      
+      
     ];
     for (const step of steps) {
       addAgentSystemLog(step);
@@ -1026,9 +1026,9 @@ const answer = data.answer || "AI chưa có phản hồi.";
             </motion.div>
           )}
 
-          {/* TAB: AI AGENT OPENCLAW */}
+          {/* TAB: AI AGENT  */}
           {activeTab === 'AI' && (
-            <div className="max-w-4xl mx-auto h-[calc(100vh-200px)] flex flex-col bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-lg relative">
+            <div className="w-full h-[calc(100vh-150px)] max-h-[calc(100vh-150px)] flex flex-col bg-white dark:bg-slate-900 relative overflow-hidden">
               <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center bg-slate-50/50 dark:bg-slate-900/50 gap-4">
                 <div className="w-12 h-12 bg-gradient-to-tr from-indigo-600 to-violet-600 rounded-xl flex items-center justify-center text-white shadow-md"><Bot size={24} /></div>
                 <div>

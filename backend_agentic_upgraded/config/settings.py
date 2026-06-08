@@ -24,5 +24,5 @@ GRADER_THRESHOLD = float(os.getenv("GRADER_THRESHOLD", "0.45"))
 
 ALLOWED_ORIGINS = os.getenv(
     "ALLOWED_ORIGINS",
-    "http://localhost:5173,http://localhost:6333"
+    "http://localhost:5173,http://localhost:3000,https://smart-retail-user.vercel.app"
 ).split(",")

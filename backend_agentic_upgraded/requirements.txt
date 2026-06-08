@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+requests
+qdrant-client
+scikit-learn
+rank-bm25
+pyvi
+tavily-python
+langgraph
+pydantic

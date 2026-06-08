@@ -1,0 +1,20 @@
+
+AI BACKEND EVALUATION REPORT
+
+Total queries: 35
+
+Agent Accuracy:
+27/35 = 77.14%
+
+Retrieval Keyword Accuracy:
+34/35 = 97.14%
+
+Average Retrieval Score:
+0.817
+
+Average Latency:
+4294.72 ms
+
+Output files:
+- eval_results.csv
+- eval_report.txt

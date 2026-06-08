@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body {
+  margin: 0;
+  background-color: #f8fafc;
+  /* Hiệu ứng bo góc lõm cho Sidebar giống Smartech */
+.active-menu-item {
+  background-color: #fdfaf7; /* Màu của nền bên phải */
+  border-radius: 40px 0 0 40px;
+  position: relative;
+}
+
+.active-menu-item::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 20px 20px 0 #fdfaf7; /* Tạo cung tròn lõm phía trên */
+  background-color: transparent;
+}
+
+.active-menu-item::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 20px -20px 0 #fdfaf7; /* Tạo cung tròn lõm phía dưới */
+  background-color: transparent;
+}
+}

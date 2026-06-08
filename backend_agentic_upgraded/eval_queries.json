@@ -1,0 +1,177 @@
+[
+  {
+    "query": "ESP32 có hỗ trợ MQTT không?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["esp32", "mqtt"]
+  },
+  {
+    "query": "RC522 dùng để làm gì?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["rc522", "rfid"]
+  },
+  {
+    "query": "DHT11 dùng để đo gì?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["dht11", "nhiệt", "ẩm"]
+  },
+  {
+    "query": "LCD I2C kết nối với vi điều khiển như thế nào?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["lcd", "i2c"]
+  },
+  {
+    "query": "Gợi ý combo làm robot car",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["robot", "car"]
+  },
+  {
+    "query": "Gợi ý combo học IoT cơ bản",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["iot", "esp32"]
+  },
+  {
+    "query": "Sản phẩm nào sắp hết hàng?",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["tồn", "kho"]
+  },
+  {
+    "query": "Cần nhập thêm linh kiện nào?",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["nhập", "hàng", "kho"]
+  },
+  {
+    "query": "Smart locker hoạt động như thế nào?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["locker", "firebase", "pin"]
+  },
+  {
+    "query": "iPhone 16 có gì mới?",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Cảm biến siêu âm HC-SR04 đo được khoảng cách bao xa?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["hc-sr04", "siêu âm", "khoảng cách"]
+  },
+  {
+    "query": "Sự khác biệt giữa Arduino Uno và ESP8266 là gì?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["arduino", "esp8266", "khác"]
+  },
+  {
+    "query": "Mạch L298N dùng để điều khiển động cơ gì?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["l298n", "động cơ"]
+  },
+  {
+    "query": "Làm sao để kết nối cảm biến mưa với Arduino?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["cảm biến mưa", "arduino"]
+  },
+  {
+    "query": "Nguyên lý hoạt động của cảm biến khí gas MQ2",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["mq2", "gas", "nguyên lý"]
+  },
+  {
+    "query": "Tư vấn bộ combo làm nhà thông minh smarthome giá rẻ",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["combo", "smarthome", "nhà thông minh"]
+  },
+  {
+    "query": "Có combo nào cho người mới bắt đầu học Arduino không shop?",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["combo", "bắt đầu", "arduino"]
+  },
+  {
+    "query": "Set linh kiện lắp ráp cánh tay robot 4 bậc",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["set", "combo", "cánh tay robot"]
+  },
+  {
+    "query": "Gợi ý trọn bộ làm máy rót rượu tự động",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["bộ", "combo", "rót rượu"]
+  },
+  {
+    "query": "Kiểm tra xem module sim A7670C còn bao nhiêu cái trong kho?",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["a7670c", "kho", "còn"]
+  },
+  {
+    "query": "Danh sách các mặt hàng bị âm kho hoặc bằng 0",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["âm kho", "hết", "0"]
+  },
+  {
+    "query": "Báo cáo số lượng linh kiện điện tử hiện tại",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["báo cáo", "số lượng", "linh kiện"]
+  },
+  {
+    "query": "Mặt hàng nào đang bán chạy nhất tháng này để nhập thêm?",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["bán chạy", "nhập"]
+  },
+  {
+    "query": "Giá vàng hôm nay tăng hay giảm?",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Tin tức mới nhất về cuộc bầu cử tổng thống Mỹ",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Thời tiết Hà Nội cuối tuần này có mưa không?",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Kết quả trận bóng đá tối qua giữa Real Madrid và Barca",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Cảm biến dht22 sai số bao nhiêu?",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["dht22", "sai số"]
+  },
+  {
+    "query": "Shop có bán nguyên bộ linh kiện làm mạch đo nhịp tim ko",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["bộ", "linh kiện", "nhịp tim"]
+  },
+  {
+    "query": "Ktra hàng tồn của servo sg90",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["ktra", "tồn", "sg90"]
+  },
+  {
+    "query": "Cách lập trình esp32 deep sleep",
+    "expected_agent": "consultant_agent",
+    "expected_keywords": ["esp32", "deep sleep"]
+  },
+  {
+    "query": "Giá cổ phiếu Vinfast hôm nay thế nào",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  },
+  {
+    "query": "Combo xe tự hành dò line",
+    "expected_agent": "combo_agent",
+    "expected_keywords": ["combo", "dò line"]
+  },
+  {
+    "query": "Những linh kiện nào đã lưu kho quá 6 tháng chưa bán được?",
+    "expected_agent": "inventory_agent",
+    "expected_keywords": ["lưu kho", "tồn"]
+  },
+  {
+    "query": "Phim rạp hot nhất hiện nay là phim gì",
+    "expected_agent": "web_search_agent",
+    "expected_keywords": ["web_fallback"]
+  }
+]

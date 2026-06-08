@@ -1,0 +1,36 @@
+id,query,expected_agent,predicted_agent,agent_ok,keyword_hits,keyword_total,keyword_ok,retrieval_score,sources,latency_ms
+1,ESP32 có hỗ trợ MQTT không?,consultant_agent,consultant_agent,True,2,2,True,1.0,esp32.md|bluetooth.md|upsell_strategy.md|mqtt.md|smart_home.md,4120.07
+2,RC522 dùng để làm gì?,consultant_agent,consultant_agent,True,2,2,True,1.0,rfid_rc522.md|gas_mq2.md|iot_attendance.md|smart_home.md|wifi.md,4052.85
+3,DHT11 dùng để đo gì?,consultant_agent,consultant_agent,True,3,3,True,1.0,dht11.md|smart_home.md|ultrasonic_hcsr04.md|weather_station.md|ldr_sensor.md,4111.5
+4,LCD I2C kết nối với vi điều khiển như thế nào?,consultant_agent,consultant_agent,True,2,2,True,0.875,stm32.md|lcd_i2c.md|esp8266.md|esp32_s3.md|arduino_uno.md,4091.3
+5,Gợi ý combo làm robot car,combo_agent,combo_agent,True,2,2,True,0.8,robot_car.md|combo_strategy.md|servo_sg90.md|dc_motor.md|ultrasonic_hcsr04.md,4098.32
+6,Gợi ý combo học IoT cơ bản,combo_agent,combo_agent,True,2,2,True,1.0,robot_car.md|led_circuit.md|iot_attendance.md|combo_strategy.md|arduino.md,4103.27
+7,Sản phẩm nào sắp hết hàng?,inventory_agent,inventory_agent,True,2,2,True,0.8,inventory_strategy.md|inventory_policy.md|stock_analysis.md|combo_strategy.md|upsell_strategy.md,4078.88
+8,Cần nhập thêm linh kiện nào?,inventory_agent,inventory_agent,True,3,3,True,1.0,upsell_strategy.md|combo_strategy.md|inventory_policy.md|smart_home.md|robot_car.md,4085.99
+9,Smart locker hoạt động như thế nào?,consultant_agent,combo_agent,False,2,3,True,0.8,smart_lock.md|firebase.md|solenoid_lock.md|smart_home.md|esp8266.md,4070.95
+10,iPhone 16 có gì mới?,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,5079.15
+11,Cảm biến siêu âm HC-SR04 đo được khoảng cách bao xa?,consultant_agent,inventory_agent,False,3,3,True,0.8,ultrasonic_hcsr04.md|robot_car.md|pir_sensor.md|upsell_strategy.md|arduino_uno.md,4059.74
+12,Sự khác biệt giữa Arduino Uno và ESP8266 là gì?,consultant_agent,consultant_agent,True,3,3,True,0.7142857142857143,arduino_uno.md|robot_car.md|bluetooth.md|mqtt.md|esp8266.md,4060.19
+13,Mạch L298N dùng để điều khiển động cơ gì?,consultant_agent,general_agent,False,2,2,True,1.0,robot_car.md|dc_motor.md|led_circuit.md|stepper_motor.md|arduino_uno.md,4026.32
+14,Làm sao để kết nối cảm biến mưa với Arduino?,consultant_agent,consultant_agent,True,2,2,True,0.7777777777777778,arduino_uno.md|rain_sensor.md|robot_car.md|weather_station.md|firebase.md,4062.59
+15,Nguyên lý hoạt động của cảm biến khí gas MQ2,consultant_agent,consultant_agent,True,2,3,True,0.7777777777777778,gas_mq2.md|esp32_s3.md|servo_sg90.md|stock_analysis.md|buzzer.md,4074.77
+16,Tư vấn bộ combo làm nhà thông minh smarthome giá rẻ,combo_agent,combo_agent,True,2,3,True,0.7272727272727273,smart_home.md|rfid_rc522.md|combo_strategy.md|gas_mq2.md|dht11.md,4077.08
+17,Có combo nào cho người mới bắt đầu học Arduino không shop?,combo_agent,combo_agent,True,2,3,True,0.625,arduino_uno.md|arduino.md|combo_strategy.md|robot_car.md|led_circuit.md,4067.05
+18,Set linh kiện lắp ráp cánh tay robot 4 bậc,combo_agent,general_agent,False,1,3,True,0.5555555555555556,robot_car.md|upsell_strategy.md|arduino.md|combo_strategy.md|buzzer.md,4091.08
+19,Gợi ý trọn bộ làm máy rót rượu tự động,combo_agent,general_agent,False,2,3,True,0.6666666666666666,wifi.md|combo_strategy.md|gas_mq2.md|stepper_motor.md|seven_segment.md,4104.85
+20,Kiểm tra xem module sim A7670C còn bao nhiêu cái trong kho?,inventory_agent,web_search_agent,False,1,3,True,1.0,web_fallback,5175.19
+21,Danh sách các mặt hàng bị âm kho hoặc bằng 0,inventory_agent,inventory_agent,True,2,3,True,0.8,servo_sg90.md|rain_sensor.md|stock_analysis.md|buzzer.md|combo_strategy.md,4085.3
+22,Báo cáo số lượng linh kiện điện tử hiện tại,inventory_agent,inventory_agent,True,2,3,True,0.7,arduino.md|websocket.md|arduino_uno.md|combo_strategy.md|buzzer.md,4101.78
+23,Mặt hàng nào đang bán chạy nhất tháng này để nhập thêm?,inventory_agent,inventory_agent,True,2,2,True,0.7,inventory_strategy.md|stock_analysis.md|inventory_policy.md|combo_strategy.md|upsell_strategy.md,4069.69
+24,Giá vàng hôm nay tăng hay giảm?,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,5222.41
+25,Tin tức mới nhất về cuộc bầu cử tổng thống Mỹ,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,5338.72
+26,Thời tiết Hà Nội cuối tuần này có mưa không?,web_search_agent,general_agent,False,0,1,False,0.5714285714285714,weather_station.md|rain_sensor.md|upsell_strategy.md|combo_strategy.md|inventory_policy.md,4055.51
+27,Kết quả trận bóng đá tối qua giữa Real Madrid và Barca,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,4982.11
+28,Cảm biến dht22 sai số bao nhiêu?,consultant_agent,consultant_agent,True,1,2,True,0.5714285714285714,dht22.md|smart_home.md|robot_car.md|ldr_sensor.md|gas_mq2.md,4096.02
+29,Shop có bán nguyên bộ linh kiện làm mạch đo nhịp tim ko,combo_agent,combo_agent,True,2,3,True,0.6666666666666666,arduino.md|combo_strategy.md|inventory_policy.md|ldr_sensor.md|stock_analysis.md,4042.27
+30,Ktra hàng tồn của servo sg90,inventory_agent,consultant_agent,False,2,3,True,0.8,servo_sg90.md|inventory_strategy.md|stock_analysis.md|esp32_s3.md|arduino.md,4063.27
+31,Cách lập trình esp32 deep sleep,consultant_agent,consultant_agent,True,1,2,True,0.5,arduino.md|esp32.md|raspberry_pi_pico.md|robot_car.md|arduino_uno.md,4066.85
+32,Giá cổ phiếu Vinfast hôm nay thế nào,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,5125.84
+33,Combo xe tự hành dò line,combo_agent,combo_agent,True,1,2,True,0.6666666666666666,ldr_sensor.md|combo_strategy.md|robot_car.md|dc_motor.md|iot_attendance.md,4083.71
+34,Những linh kiện nào đã lưu kho quá 6 tháng chưa bán được?,inventory_agent,inventory_agent,True,1,2,True,0.7,upsell_strategy.md|inventory_policy.md|inventory_strategy.md|stock_analysis.md|firebase.md,4100.99
+35,Phim rạp hot nhất hiện nay là phim gì,web_search_agent,web_search_agent,True,1,1,True,1.0,web_fallback,5189.57

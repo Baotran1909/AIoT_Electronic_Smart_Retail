@@ -8,3 +8,4 @@ pyvi
 tavily-python
 langgraph
 pydantic
+python-dotenv

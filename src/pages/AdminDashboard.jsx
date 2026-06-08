@@ -6,7 +6,6 @@ import { sendSMS } from '../services/SMSService';
 import { db } from '../services/firebase';
 import {
   analyzeInventoryData,
-  getAIInventoryStrategy,
   getQuickAdminInventoryMessage,
   buildInventoryAdminSummary,
   formatInventoryStrategyText
@@ -68,68 +67,39 @@ const App = ({ onLogout }) => {
   
 
   
+const handleGetStrategy = async () => {
+  setIsLoading(true);
+  setShowDropdown(true);
+  setAiResult("AI COO Copilot đang phân tích dữ liệu kho...");
 
-  const handleGetStrategy = async () => {
-    setIsLoading(true);
-    setShowDropdown(true);
-    setAiResult("AI Copilot đang phân tích dữ liệu kho và giá thị trường...");
+  try {
+    const systemData = buildAdminAIContext();
 
-    try {
-const strategy = await getAIInventoryStrategy(inventoryInsights);
+    const response = await fetch(
+      "https://smart-retail-user.onrender.com/admin-ai",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          question: "Phân tích tồn kho hiện tại và đề xuất chiến lược nhập hàng cho Admin.",
+          context: systemData,
+          user_id: "admin",
+          history: []
+        })
+      }
+    );
 
+    const data = await response.json();
 
-  // AI trả object
-  console.log(strategy);
-
-  // format đẹp cho admin
-  const formatted = `
-  📦 TỔNG QUAN KHO
-
-  - Risk Items:
-  ${strategy.summary.totalRiskItems}
-
-  - Critical:
-  ${strategy.summary.criticalItems}
-
-  - Recommendation:
-  ${strategy.summary.recommendation}
-
-  ================================
-
-  ${strategy.items.map(item => `
-
-  🔴 ${item.name}
-
-  - Risk:
-  ${item.riskLevel}
-
-  - Reason:
-  ${item.reason}
-
-  - Import:
-  ${item.suggestedImport}
-
-  - Priority:
-  ${item.priority}
-
-  `).join("\n")}
-
-  ================================
-
-  📌 ACTIONS:
-
-  ${strategy.actions.map(
-    a => `• ${a}`
-  ).join("\n")}
-  `;
-
-  setAiResult(formatted);
-    } catch (error) {
-      setAiResult("Hệ thống đang bận, sếp vui lòng thử lại sau nhé!");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    setAiResult(data?.answer || "AI chưa có phản hồi.");
+  } catch (error) {
+    setAiResult("Hệ thống đang bận, vui lòng thử lại sau.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   useEffect(() => {
     if (products.length > 0 && historyOrders.length > 0) {

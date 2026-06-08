@@ -360,21 +360,29 @@ const App = ({ onLogout, isGuest = false, onLoginSuccess = null }) => {
       const productContext = buildCompactProductContext();
 
       const response = await fetch("https://smart-retail-user.onrender.com/user-ai", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    question: text,
-    context: productContext
-  })
-});
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      body: JSON.stringify({
+        question: text,
+        context: productContext,
+        user_id: currentUser?.uid || "guest",
+        history: newHistory.slice(-10)
+      })
+      });
 
 const data = await response.json();
 
 const answer = data.answer || "AI chưa có phản hồi.";
       setIsThinking(false);
-      setChatHistory(prev => [...prev, { role: "ai", content: answer }]);
+      setChatHistory(prev => [
+        ...prev,
+        {
+          role: "assistant",
+          content: answer
+        }
+      ]);
     } catch (e) {
       setIsThinking(false);
       setChatHistory(prev => [...prev, { role: "ai", content: "Trợ lý AI đang bận xử lý hoặc mất kết nối: " + e.message }]);

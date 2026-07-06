@@ -33,6 +33,7 @@ const appId = typeof __app_id !== 'undefined' ? __app_id : 'smart-retail-hcmute'
 const EMAILJS_PUBLIC_KEY = 'OtNOKGfht4flx5uQs';
 const EMAILJS_SERVICE_ID = 'service_1cuk1gq';
 const EMAILJS_TEMPLATE_ID = 'template_neell8j';
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const FALLBACK_PRODUCTS = [
   { id: 'demo_esp32', name: 'ESP32 DevKit V1', category: 'Vi điều khiển', price: 125000, stock: 10, location: 'Khu A-01', image: 'https://picsum.photos/seed/esp32/300/300', description: 'Bo mạch ESP32 dùng cho IoT.' },
@@ -423,6 +424,7 @@ const answer = data.answer || "AI chưa có phản hồi.";
       return;
     }
     if (cart.length === 0) return notify("Giỏ hàng của bạn đang trống!");
+    if (currentUser?.email && !customerEmail.trim()) setCustomerEmail(currentUser.email);
     setCheckoutStep(1);
     setShowCheckoutModal(true);
   };
@@ -473,6 +475,13 @@ const answer = data.answer || "AI chưa có phản hồi.";
 
   // GỬI EMAIL THÔNG BÁO THỰC TẾ QUA EMAILJS
   const sendConfirmationEmail = async (orderData) => {
+    const receiverEmail = (orderData.email || '').trim();
+
+    if (!receiverEmail || !EMAIL_REGEX.test(receiverEmail)) {
+      console.error('❌ Không gửi email vì email người nhận không hợp lệ:', receiverEmail);
+      return false;
+    }
+
     const itemsTableRows = orderData.items.map(item => `
       <tr style="border-bottom: 1px solid #e2e8f0; color: #334155; font-size: 14px;">
         <td style="padding: 8px; text-align: left;">${item.name}</td>
@@ -492,9 +501,9 @@ const answer = data.answer || "AI chưa có phản hồi.";
     else if (orderData.type === 'shipping') pickupValue = orderData.address;
 
     const emailParams = {
-      to_email: orderData.email,
+      to_email: receiverEmail,
       user_name: orderData.userName,
-      email: orderData.email,
+      email: receiverEmail,
       order_id: orderData.orderId,
       order_time: new Date().toLocaleString('vi-VN'),
       product_subtotal: Number(subtotal).toLocaleString() + 'đ',
@@ -507,8 +516,8 @@ const answer = data.answer || "AI chưa có phản hồi.";
     };
 
     try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams);
-      console.log('✅ Email xác nhận đơn hàng đã gửi tới: ' + orderData.email);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, emailParams, EMAILJS_PUBLIC_KEY);
+      console.log('✅ Email xác nhận đơn hàng đã gửi tới: ' + receiverEmail);
       return true;
     } catch (error) {
       console.error('❌ Lỗi gửi email:', error);
@@ -517,11 +526,11 @@ const answer = data.answer || "AI chưa có phản hồi.";
   };
 
   const confirmOrder = async () => {
-    const resolvedEmail = customerEmail.trim() || currentUser?.email || '';
+    const resolvedEmail = (customerEmail.trim() || currentUser?.email || '').trim();
 
     if (!paymentMethod || !deliveryMethod) return alert('Vui lòng chọn đủ thông tin thanh toán và nhận hàng!');
-    if (!phone.trim() && !resolvedEmail) return alert('Vui lòng cung cấp Số điện thoại hoặc Email!');
-    if (resolvedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(resolvedEmail)) return alert('Email không hợp lệ!');
+    if (!resolvedEmail) return alert('Vui lòng nhập Email để nhận hóa đơn, mã PIN hoặc số thứ tự nhận hàng!');
+    if (!EMAIL_REGEX.test(resolvedEmail)) return alert('Email không hợp lệ!');
     if (deliveryMethod === 'shipping' && !address.trim()) return alert('Vui lòng nhập địa chỉ giao hàng!');
 
     setIsProcessing(true);
@@ -586,7 +595,12 @@ const answer = data.answer || "AI chưa có phản hồi.";
       setOrderReceipt(newOrder);
       setTechPoints(prev => prev + Math.floor(finalTotal / 1000));
 
-      if (resolvedEmail) await sendConfirmationEmail(newOrder);
+      const emailSent = await sendConfirmationEmail(newOrder);
+      if (!emailSent) {
+        alert('Đơn hàng đã tạo thành công, nhưng Email xác nhận chưa gửi được. Hãy kiểm tra EmailJS Service/Template/Public Key và Console.');
+      } else {
+        notify(`Đã gửi email xác nhận tới ${resolvedEmail}`);
+      }
 
       setCart([]);
       setCheckoutStep(2);
@@ -599,6 +613,8 @@ const answer = data.answer || "AI chưa có phản hồi.";
   };
 
   const totalPrice = useMemo(() => cart.reduce((s, i) => s + ((i.price || 0) * i.qty), 0), [cart]);
+  const resolvedCheckoutEmail = (customerEmail.trim() || currentUser?.email || '').trim();
+  const isCheckoutEmailValid = EMAIL_REGEX.test(resolvedCheckoutEmail);
 
   const filteredProducts = products.filter(p => 
     (activeCategory === 'Tất cả' || p.category === activeCategory) &&
@@ -1301,7 +1317,7 @@ const answer = data.answer || "AI chưa có phản hồi.";
                             placeholder="ngoc@gmail.com" 
                           />
                           <p className="text-[10px] text-slate-400 mt-2 font-bold italic">
-                            * Hệ thống chấp nhận SĐT, Email hoặc cả hai để thông báo.
+                            * Email bắt buộc để gửi hóa đơn, mã PIN hoặc số thứ tự nhận hàng.
                           </p>
                         </div>
                       </div>
@@ -1389,12 +1405,12 @@ const answer = data.answer || "AI chưa có phản hồi.";
                     <button 
                       disabled={
                         isProcessing || !paymentMethod || !deliveryMethod || 
-                        (!phone.trim() && !customerEmail.trim() && !(currentUser && currentUser.email)) || 
-                        (deliveryMethod === 'shipping' && !address)
+                        !isCheckoutEmailValid || 
+                        (deliveryMethod === 'shipping' && !address.trim())
                       } 
                       onClick={confirmOrder} 
                       className={`w-full py-4 rounded-[14px] font-black tracking-widest text-[15px] uppercase transition-all flex justify-center items-center gap-2 ${
-                        paymentMethod && deliveryMethod && (phone.trim() || customerEmail.trim()) && !isProcessing
+                        paymentMethod && deliveryMethod && isCheckoutEmailValid && !isProcessing && (deliveryMethod !== 'shipping' || address.trim())
                           ? 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white shadow-lg shadow-indigo-200 active:scale-[0.98]' 
                           : 'bg-slate-200 text-slate-400 cursor-not-allowed'
                       }`}
@@ -1458,6 +1474,11 @@ const answer = data.answer || "AI chưa có phản hồi.";
                         </p>
                       </div>
                     )}
+
+                    <div className="pt-3 border-t border-slate-200">
+                      <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Email nhận hóa đơn</p>
+                      <p className="text-sm font-black text-slate-700 mt-1 break-all">{orderReceipt?.email}</p>
+                    </div>
 
                     <div className="pt-3 border-t border-slate-200">
                       <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">Mã đơn</p>
